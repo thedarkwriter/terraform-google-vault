@@ -310,6 +310,29 @@ tls_save_ca_to_disk = false
     same network. Always connect through the load balance. You can alter the
     load balancer to be an internal-only load balancer if needed.
 
+- **Why am I getting Error 403: Permission 'cloudkms.cryptoKeyVersions.useToEncrypt'!**
+
+    If you are getting this error, then the credentials you are using to execute
+    terraform do not have permissions to the vault-init key create.
+
+    If you need to, you can create a Terraform resource block like this:
+
+```terraform
+resource "google_kms_key_ring_iam_member" "vault_keyring_management" {
+  key_ring_id = "vault"
+  member = "serviceAccount:${var.svcaccount}@${var.google_project_name[var.env]}.iam.gserviceaccount.com"
+}
+```
+    Or you can add the permissions through gcloud
+
+```bash
+gcloud kms keys add-iam-policy-binding vault-init \                                                                                           ░▒▓     --keyring vault \
+    --location $REGION \
+    --member serviceAccount:$SERVICEACCOUNT@$PROJECTNAME.iam.gserviceaccount.com \
+    --role roles/cloudkms.cryptoKeyEncrypterDecrypter \
+    --project $PROJECTNAME
+```
+
 [vault-redirect-loop]: https://www.vaultproject.io/docs/concepts/ha.html#behind-load-balancers
 [vault-production-hardening]: https://www.vaultproject.io/guides/operations/production.html
 [registry-inputs]: https://registry.terraform.io/modules/terraform-google-modules/vault/google?tab=inputs
