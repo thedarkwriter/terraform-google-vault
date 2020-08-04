@@ -236,6 +236,7 @@ done
 | ca\_key\_pem | Private key for the CA. |
 | service\_account\_email | Email for the vault-admin service account. |
 | vault\_addr | Full protocol, address, and port (FQDN) pointing to the Vault load balancer.This is a drop-in to VAULT_ADDR: `export VAULT_ADDR="$(terraform output vault_addr)"`. And then continue to use Vault commands as usual. |
+| vault\_kms\_key\_id | The KMS key created from the keyring used for Vault |
 | vault\_lb\_addr | Address of the load balancer without port or protocol information. You probably want to use `vault_addr`. |
 | vault\_lb\_port | Port where Vault is exposed on the load balancer. |
 | vault\_nat\_ips | The NAT-ips that the vault nodes will use to communicate with external services. |

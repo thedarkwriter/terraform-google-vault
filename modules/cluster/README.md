@@ -84,6 +84,7 @@ module "vault_cluster" {
 | ca\_cert\_pem | CA certificate used to verify Vault TLS client connections. |
 | ca\_key\_pem | Private key for the CA. |
 | vault\_addr | Full protocol, address, and port (FQDN) pointing to the Vault load balancer.This is a drop-in to VAULT_ADDR: `export VAULT_ADDR="$(terraform output vault_addr)"`. And then continue to use Vault commands as usual. |
+| vault\_kms\_key\_id | The key created from the Vault keyring for encryption and decryption of Vault module files |
 | vault\_lb\_addr | Address of the load balancer without port or protocol information. You probably want to use `vault_addr`. |
 | vault\_lb\_port | Port where Vault is exposed on the load balancer. |
 
