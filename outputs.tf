@@ -71,3 +71,8 @@ output "vault_nat_ips" {
   value       = google_compute_address.vault-nat.*.address
   description = "The NAT-ips that the vault nodes will use to communicate with external services."
 }
+
+output "vault_kms_key_id" {
+  vaule       = module.cluster.vault_kms_key_id
+  description = "The KMS key created from the keyring used for Vault"
+}

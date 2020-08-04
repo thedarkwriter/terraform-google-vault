@@ -44,3 +44,9 @@ output "vault_lb_port" {
   value       = var.vault_port
   description = "Port where Vault is exposed on the load balancer."
 }
+
+output "vault_kms_key_id" {
+  value       = google_kms_crypto_key.vault-init.id
+  sensitive   = true
+  description = "The key created from the Vault keyring for encryption and decryption of Vault module files"
+}
